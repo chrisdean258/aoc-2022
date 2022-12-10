@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+
 def update(headx, heady, tailx, taily):
     if abs(headx - tailx) > 1 and abs(heady - taily) > 1:
         tailx = (headx + tailx) // 2
