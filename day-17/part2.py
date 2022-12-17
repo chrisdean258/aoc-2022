@@ -39,7 +39,7 @@ cycle = None
 
 for i in range(no_pieces):
     tops.append(top)
-    if i % 5 == 0:
+    if i % len(pieces) == 0:
         key = num_taken % plen
         if key in last_seen:
             diff, pos = last_seen[key]
@@ -74,4 +74,9 @@ for i in range(no_pieces):
             break
 
 cycle_diff = tops[-1] - tops[-cycle - 1]
-print(no_pieces // cycle * cycle_diff + tops[no_pieces % cycle])
+
+k = len(tops) - 1
+while k % cycle != no_pieces % cycle:
+    k -= 1
+
+print(tops[k] + (no_pieces - k) // cycle * cycle_diff)
