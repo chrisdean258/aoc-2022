@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import fileinput
-import sys
 
 grid = [a.strip() for a in fileinput.input()]
 up = set()
@@ -79,22 +78,14 @@ pos = {(0, 1)}
 next_pos = set()
 time = 1
 advance()
-incr = 0
-targets = [(len(grid) - 1, len(grid[0]) - 2), (0, 1),
-           (len(grid) - 1, len(grid[0]) - 2)]
+target = (len(grid) - 1, len(grid[0]) - 2)
 while True:
     looking = pos.pop()
-    for i, target in enumerate(targets):
-        if incr == i and looking == target:
-            incr += 1
-            pos = {looking}
-            next_pos = set()
-            print(time, incr)
-            if incr == len(targets):
-                sys.exit()
-            advance()
-            time += 1
-            continue
+    if looking == target:
+        pos = {looking}
+        next_pos = set()
+        print(time)
+        break
     for p in adj(*looking):
         next_pos.add(p)
     if not pos:
